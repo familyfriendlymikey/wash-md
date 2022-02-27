@@ -1,2 +1,2 @@
-# imda
-A live reloading markdown viewer that uses github's markdown css.
+# watch-md
+A live reloading markdown viewer written in imba that uses github's markdown css.
