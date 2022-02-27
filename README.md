@@ -1,9 +1,11 @@
 # watch-md
 
 A live updating markdown viewer that:
-- Doesn't refresh the browser.
-- Written in ~50 lines of Imba.
 - Uses Github's attractive markdown css.
+- Renders whatever markdown file, recursing subdirectories, that
+	was most recently edited.
+- Is written in ~40 lines of Imba.
+- Doesn't refresh the browser.
 
 ## Installation
 I don't want to upload this to any package managers.
@@ -20,16 +22,16 @@ cd ~/repo/ && \
 git clone git@github.com:familyfriendlymikey/watch-md.git && \
 cd watch-md && \
 npm i && \
-echo 'screen -md imba run ~/repo/watch-md/main.imba "$1"' > ~/bin/md && \
+echo 'screen -md imba run ~/repo/watch-md/main.imba' > ~/bin/md && \
 chmod +x ~/bin/md
 ```
 
 ## Usage
 
-Whenever I want to edit a markdown file, I just run
+Whenever I want to edit markdown files, I just run
 
 ```
-md README.md
+md
 ```
 
 You may have noticed that we are using `screen -md` before we run imba.
