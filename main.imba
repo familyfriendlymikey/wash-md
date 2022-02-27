@@ -1,6 +1,6 @@
-const port = 3000
+const port = 8080
 
-import express from 'express'
+import http from 'http'
 import { WebSocketServer } from 'ws'
 import { marked } from 'marked'
 import fs from 'fs'
@@ -22,8 +22,12 @@ unless fs.existsSync(infile)
 	p "File does not exist."
 	process.exit()
 
-const app = express()
-const server = require('http').createServer(app);
+const server = http.createServer! do |req, res|
+	res.statusCode = 200
+	res.setHeader('Content-Type', 'text/html')
+	res.write(get_content!)
+	res.end!
+
 const wss = new WebSocketServer({ server:server })
 
 def get_content
@@ -42,8 +46,6 @@ def get_content
 
 wss.on('connection') do |ws|
 	fs.watchFile(infile, {"interval": 100} do ws.send('md'))
-
-app.get('/', do(req, res) res.send(get_content!))
 
 server.listen(port) do
 	open("http://localhost:{port}")
