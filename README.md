@@ -1,20 +1,30 @@
 # watch-md
 
-A live updating markdown viewer that doesn't refresh the browser
-written in ~50 lines of imba that uses github's markdown css.
+A live updating markdown viewer that:
+- Doesn't refresh the browser.
+- Written in ~50 lines of Imba.
+- Uses Github's attractive markdown css.
 
-## Usage
+## Installation
 I don't want to upload this to any package managers.
-The following works well for me:
+Instead, I:
+
+- Add `~/bin` to my `PATH`.
+- Clone this repository to `~/repo/`, where I store all repos.
+- Create a file called `md` in `~/bin` which just runs `imba.main`.
+
+Sounds complicated but it's actually very simple.
 
 ```
 cd ~/repo/ && \
 git clone git@github.com:familyfriendlymikey/watch-md.git && \
 cd watch-md && \
 npm i && \
-echo 'imba run ~/repo/watch-md/main.imba "$1"' > ~/bin/md && \
+echo 'screen -md imba run ~/repo/watch-md/main.imba "$1"' > ~/bin/md && \
 chmod +x ~/bin/md
 ```
+
+## Usage
 
 Whenever I want to edit a markdown file, I just run
 
@@ -22,45 +32,21 @@ Whenever I want to edit a markdown file, I just run
 md README.md
 ```
 
-This however hangs the terminal,
-and I would rather use the same terminal window to edit the file in vim.
-So instead of the above, I just background the process with `&`.
-
-```
-md README.md &
-```
-
-The terminal will output something like:
-
-```
-[1] 24059
-```
-I believe the `1` is the job number and the `24059` is the process ID.
-
-Now we can edit our file with vim.
+You may have noticed that we are using `screen -md` before we run imba.
+This prevents the terminal from hanging
+by running our command in the background,
+or rather in a `screen`.
+This way we don't have to open a new
+terminal window to edit the file in vim.
 
 ```
 vim README.md
 ```
 
-When we're done, we can either foreground the process and exit it
+When we are done editing our file,
+we should terminate the screen session with:
 
 ```
-fg
+screen -r
 # Press Ctrl-c
 ```
-
-or we can kill the job number that we saw earlier
-
-```
-kill %1
-```
-
-or if you haven't started any new background processes since,
-you can just kill the most recent job with
-
-```
-kill %%
-```
-
-Enjoy.
