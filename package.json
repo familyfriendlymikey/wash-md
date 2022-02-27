@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chokidar": "^3.5.3",
     "marked": "^4.0.12",
     "open": "^8.4.0",
     "ws": "^8.5.0"

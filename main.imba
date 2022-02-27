@@ -1,4 +1,5 @@
 const port = 8080
+const url = "http://localhost:{port}"
 
 import http from 'http'
 import { WebSocketServer } from 'ws'
@@ -6,6 +7,7 @@ import { marked } from 'marked'
 import fs from 'fs'
 import open from 'open'
 import ghcss from './ghcss'
+import { watch } from 'chokidar'
 
 let p = console.log
 
@@ -25,27 +27,28 @@ unless fs.existsSync(infile)
 const server = http.createServer! do |req, res|
 	res.statusCode = 200
 	res.setHeader('Content-Type', 'text/html')
-	res.write(get_content!)
-	res.end!
-
-const wss = new WebSocketServer({ server:server })
-
-def get_content
-	"""
+	res.write """
 		<html>
+			<style>
+				{ghcss}
+			</style>
 			<script>
-				const socket = new WebSocket('ws://localhost:{port}')
+				const socket = new WebSocket("ws://localhost:{port}")
 				socket.addEventListener('message', function (event) \{
-					location.reload()
+					document.body.innerHTML = event.data
 				\})
 			</script>
-			<body class="markdown-body">{marked(fs.readFileSync(infile, "utf8"))}</div>
-			<style>{ghcss}</style>
+			<body class="markdown-body"></body>
 		</html>
 	"""
+	res.end!
+
+const wss = new WebSocketServer({ server })
 
 wss.on('connection') do |ws|
-	fs.watchFile(infile, {"interval": 100} do ws.send('md'))
+	p "Socket connected, watching {infile} at {url}."
+	watch(infile).on('all') do
+		ws.send(marked(fs.readFileSync(infile, "utf8")))
 
 server.listen(port) do
-	open("http://localhost:{port}")
+	open(url)
