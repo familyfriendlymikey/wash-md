@@ -45,6 +45,5 @@ wss.on('connection') do |ws|
 
 app.get('/', do(req, res) res.send(get_content!))
 
-server.listen(port)
-
-open("http://localhost:{port}")
+server.listen(port) do
+	open("http://localhost:{port}")
