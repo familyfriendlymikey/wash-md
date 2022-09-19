@@ -8,47 +8,30 @@ A live updating markdown viewer that:
 - Doesn't refresh the browser.
 
 ## Installation
-I don't want to upload this to any package managers.
-Instead, I:
-
-- Add `~/bin` to my `PATH`.
-- Clone this repository to `~/repo/`, where I store all repos.
-- Create a file called `md` in `~/bin` which just runs `imba.main`.
-
-Sounds complicated but it's actually very simple.
-
 ```
-cd ~/repo/ && \
-git clone git@github.com:familyfriendlymikey/watch-md.git && \
-cd watch-md && \
-npm i && \
-echo 'screen -md imba run ~/repo/watch-md/main.imba' > ~/bin/md && \
-chmod +x ~/bin/md
+npm i -g watch-md
+npm i -g pm2 # optional
 ```
 
-## Usage
-
-Whenever I want to edit markdown files, I just run
-
+### Usage
+*In my home directory* I just do
 ```
-md
+pm2 start md
 ```
+and leave it running.
 
-You may have noticed that we are using `screen -md` before we run imba.
-This prevents the terminal from hanging
-by running our command in the background,
-or rather in a `screen`.
-This way we don't have to open a new
-terminal window to edit the file in vim.
+Sure it uses like 80MB RAM.
+Not sure if I care about that yet.
+But now whenever you save a markdown file basically
+anywhere on your computer,
+it'll render to [localhost:8087](),
+which is very quick to get to if you use my app
+[fuzzyhome](https://github.com/familyfriendlymikey/fuzzyhome)
+or use an alias.
 
+Some useful bash/zsh aliases for MacOS:
 ```
-vim README.md
-```
-
-When we are done editing our file,
-we should terminate the screen session with:
-
-```
-screen -r
-# Press Ctrl-c
+alias m="open 'http://localhost:8087'"
+alias psa="pm2 start all"
+alias pso="pm2 stop all"
 ```

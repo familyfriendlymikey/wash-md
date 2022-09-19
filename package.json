@@ -1,20 +1,25 @@
 {
-  "name": "repo",
+  "name": "watch-md",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
+  "description": "A lightweight recursive markdown file watcher.",
+  "bin": {
+    "md": "dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-css": "imbac ghcss.imba -o dist",
+    "build-index": "echo '#! /usr/bin/env node' > dist/index.js && imbac index.imba -p >> dist/index.js",
+    "build": "npm run build-css && npm run build-index"
   },
-  "author": "",
+  "author": "Mikey Oz",
+  "homepage": "https://github.com/familyfriendlymikey/replacing#readme",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/familyfriendlymikey/replacing.git"
+  },
   "dependencies": {
     "chokidar": "^3.5.3",
     "marked": "^4.0.12",
-    "open": "^8.4.0",
     "ws": "^8.5.0"
   }
 }

@@ -1,4 +1,4 @@
-export default '''
+module.exports = '''
 .markdown-body {
   padding: 40px;
   color-scheme: dark;

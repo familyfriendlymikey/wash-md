@@ -1,11 +1,11 @@
-const port = 8080
+const port = 8087
 const url = "http://localhost:{port}"
 
-import { WebSocketServer } from 'ws'
-import { marked } from 'marked'
-import fs from 'fs'
-import ghcss from './ghcss'
-import { watch } from 'chokidar'
+const { WebSocketServer } = require 'ws'
+const { marked } = require 'marked'
+const fs = require 'fs'
+const ghcss = require './ghcss'
+const { watch } = require 'chokidar'
 
 const server = require('http').createServer! do |req, res|
 	res.statusCode = 200
@@ -33,5 +33,4 @@ wss.on('connection') do |ws|
 	watch('**/*.md').on('change') do |path|
 		ws.send(marked(fs.readFileSync(path, "utf8")))
 
-server.listen(port) do
-	require('open')(url)
+server.listen(port)
