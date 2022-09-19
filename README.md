@@ -1,37 +1,48 @@
-# watch-md
+# wash-md
 
-A live updating markdown viewer that:
-- Uses Github's attractive markdown css.
-- Renders whatever markdown file, recursing subdirectories, that
-	was most recently edited.
-- Is written in ~40 lines of Imba.
-- Doesn't refresh the browser.
+A hot reloading markdown viewer written in 30 lines of Imba that
+uses Github's attractive markdown css. Renders the most recently
+edited markdown file recursing subdirectories.
 
 ## Installation
+
 ```
-npm i -g watch-md
-npm i -g pm2 # optional
+npm i -g wash-md
 ```
 
-### Usage
-*In my home directory* I just do
-```
-pm2 start md
-```
-and leave it running.
+This installs an `md` command.
 
-Sure it uses like 80MB RAM.
-Not sure if I care about that yet.
-But now whenever you save a markdown file basically
-anywhere on your computer,
-it'll render to [localhost:8087](),
-which is very quick to get to if you use my app
-[fuzzyhome](https://github.com/familyfriendlymikey/fuzzyhome)
-or use an alias.
+## Usage
 
-Some useful bash/zsh aliases for MacOS:
+- Run `md` in any directory.
+- Navigate to [localhost:3000](http://localhost:3000).
+- Save a markdown file in the same directory or any subdirectory.
+
+### Better Usage
+
+You can run `md` in your home directory with `pm2`:
+
 ```
-alias m="open 'http://localhost:8087'"
-alias psa="pm2 start all"
-alias pso="pm2 stop all"
+cd ~
+PORT=4487 npx pm2 start md
+# choose whatever port you want
 ```
+
+and just leave it running.
+
+Now whenever you save a markdown file anywhere on your computer,
+it'll render to localhost at your chosen port, which is very
+quick to get to if you use my app
+[fuzzyhome](https://github.com/familyfriendlymikey/fuzzyhome) or
+a bash alias.
+
+Here are some potential bash/zsh aliases to get you started:
+
+```
+alias m="open 'http://localhost:4487'"
+alias psmd="PORT=4487 npx pm2 start md --name wash-md"
+alias pdmd="npx pm2 delete wash-md"
+```
+
+`open` is from MacOS but on another OS you can
+probably find a package that does the same thing.
