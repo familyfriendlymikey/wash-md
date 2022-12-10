@@ -46,3 +46,5 @@ alias pdmd="npx pm2 delete wash-md"
 
 `open` is from MacOS but on another OS you can
 probably find a package that does the same thing.
+
+temp
