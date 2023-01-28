@@ -32,9 +32,9 @@ and just leave it running.
 
 Now whenever you save a markdown file anywhere on your computer,
 it'll render to localhost at your chosen port, which is very
-quick to get to if you use my app
-[fuzzyhome](https://github.com/familyfriendlymikey/fuzzyhome) or
-a bash alias.
+quick to get to if you use my Chrome extension
+[fuzzyhome](https://chrome.google.com/webstore/detail/fuzzyhome/lbnndgaohjkpbaekakcdfeiacagfcinf)
+or a bash alias.
 
 Here are some potential bash/zsh aliases to get you started:
 
